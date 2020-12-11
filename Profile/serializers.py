@@ -39,3 +39,22 @@ class MunicipalProfileSerializer(serializers.ModelSerializer):
         model = MunicipalProfile
         fields = ('id', 'name', 'municipality', 'employee_number')
         read_only_fields = ('user',)
+
+
+class MunicipalSerializer(serializers.ModelSerializer):
+    profile = MunicipalProfileSerializer()
+
+    class Meta:
+        model = User
+        fields = ('username', 'first_name', 'last_name',
+                  'email', 'profile', 'password')
+        extra_kwargs = {'password': {'write_only': True}}
+
+    def create(self, validated_data):
+        profile_data = validated_data.pop('profile')
+        password = validated_data.pop('password')
+        user = User.objects.create(**validated_data)
+        user.set_password(password)
+        user.save()
+        MunicipalProfile.objects.create(user=user, **profile_data)
+        return user

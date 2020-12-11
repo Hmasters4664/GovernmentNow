@@ -50,10 +50,7 @@ class GetTicketsByMe(generics.ListAPIView):
     serializer_class = TicketSerializer
 
     def get_queryset(self):
-        pk = self.request.GET.get('pk', '')
-        me = get_object_or_404(Profile, pk=pk)
-
-        return Ticket.objects.filter(requester=me)
+        return Ticket.objects.filter(requester=self.request.user.profile)
 
 
 class GetTicketsByArea(generics.ListAPIView):

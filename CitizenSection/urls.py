@@ -3,5 +3,5 @@ from django.urls import include, re_path, path
 from CitizenSection import views
 
 urlpatterns = [
-    path('register', views.create_user, name='register'),
+    path('citizen/register', views.create_user, name='citizen-register'),
 ]

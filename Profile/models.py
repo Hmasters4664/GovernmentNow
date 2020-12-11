@@ -55,7 +55,7 @@ class Profile(models.Model):
     name = models.CharField(max_length=150, blank=False, validators=[validate_characters], )
     gender = models.IntegerField(choices=GENDER, default='Undefined')
     race = models.IntegerField(choices=RACE, default='Undefined')
-    identification_number = models.CharField(max_length=25, unique=True)
+    identification_number = models.CharField(max_length=25, unique=True, blank=False,)
     contact = models.CharField(max_length=12, blank=True, validators=[validate_characters], )
     birth_date = models.DateField(null=True, blank=True, )
     picture_url = models.CharField(max_length=200, default='')
