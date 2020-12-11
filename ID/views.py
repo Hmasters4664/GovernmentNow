@@ -40,6 +40,16 @@ class FileUploadView(APIView):
 
         if file_serializer.is_valid():
             file_serializer.save(application=application)
+            application.status = 2
+            application.save()
             return Response(file_serializer.data, status=status.HTTP_201_CREATED)
         else:
             return Response(file_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class MyApplications(generics.ListAPIView):
+    permission_classes = [IsAuthenticated]
+    serializer_class = ApplicationSerializers
+
+    def get_queryset(self):
+        return Application.objects.filter(user=self.request.user.profile)

@@ -44,6 +44,17 @@ DOCTYPE = (
     (SOCIAL, 'Social Grant Card'),
 )
 
+ERROR = 0
+ACCEPTED = 1
+COMPLETE = 2
+INCOMPLETE = 3
+STATUS = (
+    (ERROR, 'ERROR'),
+    (ACCEPTED, 'ACCEPTED'),
+    (COMPLETE, 'COMPLETE'),
+    (INCOMPLETE, 'INCOMPLETE'),
+)
+
 
 class Application(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False, unique=True)
@@ -51,11 +62,12 @@ class Application(models.Model):
     gender = models.IntegerField(choices=GENDER, default='Undefined')
     race = models.IntegerField(choices=RACE, default='Undefined')
     type = models.IntegerField(choices=DOCTYPE, default='Identity Document')
+    status = models.IntegerField(choices=STATUS, default=3)
     user = models.ForeignKey(Profile, on_delete=models.CASCADE, blank=False)
     birth_date = models.DateField(null=True, blank=True, )
     identification_number = models.CharField(max_length=25, unique=True, blank=False, )
+    message = models.CharField(max_length=100, unique=False, blank=True, )
     date_created = models.DateField(auto_now=True)
-
 
 
 class Documents(models.Model):
