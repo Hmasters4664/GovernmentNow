@@ -23,7 +23,7 @@ from rest_framework_simplejwt.views import (
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('Ticketing.urls')),
-    path('', include('ID.urls'))
+    path('', include('CitizenSection.urls')),
+    path('', include('Ticketing.urls'))
 
 ]

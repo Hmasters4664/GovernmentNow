@@ -59,3 +59,12 @@ class Profile(models.Model):
     contact = models.CharField(max_length=12, blank=True, validators=[validate_characters], )
     birth_date = models.DateField(null=True, blank=True, )
     picture_url = models.CharField(max_length=200, default='')
+
+
+class MunicipalProfile(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False, unique=True)
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    name = models.CharField(max_length=150, blank=False, validators=[validate_characters], )
+    municipality = models.CharField(max_length=100, blank=True)
+    employee_number = models.CharField(max_length=25, unique=True)
+    suburb = models.CharField(max_length=100, blank=True)

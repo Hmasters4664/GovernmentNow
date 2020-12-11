@@ -32,7 +32,19 @@ class Ticket(models.Model):
     description = models.CharField(max_length=200, blank=True)
     province = models.CharField(max_length=20, blank=True)
     city = models.CharField(max_length=100, blank=True)
+    requester = models.ForeignKey(Profile, on_delete=models.CASCADE, blank=True)
     suburb = models.CharField(max_length=100, blank=True)
     street = models.CharField(max_length=150, blank=True)
     date_created = models.DateField(auto_now=True )
     date_completed = models.DateField(blank=True, null=True)
+    done = models.BooleanField(default=False)
+
+    class Meta:
+        ordering = ['-date_created']
+
+
+class TicketComment(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False, unique=True)
+    commenter = models.ForeignKey(Profile, on_delete=models.CASCADE, blank=True)
+    ticket = models.ForeignKey(Ticket, on_delete=models.CASCADE, blank=True)
+    comment = models.CharField(max_length=200, blank=True)
