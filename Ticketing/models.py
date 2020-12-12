@@ -29,7 +29,7 @@ TYPE = (
 class Ticket(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False, unique=True)
     issue = models.IntegerField(choices=TYPE, default=0)
-    description = models.CharField(max_length=200, blank=True)
+    description = models.TextField(blank=True)
     province = models.CharField(max_length=20, blank=True)
     city = models.CharField(max_length=100, blank=True)
     requester = models.ForeignKey(Profile, on_delete=models.CASCADE, blank=True)

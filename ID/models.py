@@ -65,8 +65,9 @@ class Application(models.Model):
     status = models.IntegerField(choices=STATUS, default=3)
     user = models.ForeignKey(Profile, on_delete=models.CASCADE, blank=False)
     birth_date = models.DateField(null=True, blank=True, )
-    identification_number = models.CharField(max_length=25, unique=True, blank=False, )
+    identification_number = models.CharField(max_length=25,blank=False, )
     message = models.CharField(max_length=100, unique=False, blank=True, )
+    has_docs = models.BooleanField(default=True)
     date_created = models.DateField(auto_now=True)
 
 

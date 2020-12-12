@@ -13,11 +13,11 @@ class ApplicationSerializers(serializers.ModelSerializer):
     class Meta:
         model = Application
         fields = ('id', 'name', 'status', 'type', 'status_name', 'type_name', 'gender_name', 'race_name'
-                  , 'gender', 'race', 'birth_date', 'identification_number',
+                  , 'gender', 'race', 'has_docs', 'birth_date', 'identification_number',
                   'date_created')
 
 
 class DocumentsSerializers(serializers.ModelSerializer):
     class Meta:
         model = Documents
-        fields = ('id','file')
+        fields = ('id', 'file')

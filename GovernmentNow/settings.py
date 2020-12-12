@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'ID',
     'CitizenSection',
     'GovernmentSection',
+    'Dashboard',
 ]
 
 MIDDLEWARE = [

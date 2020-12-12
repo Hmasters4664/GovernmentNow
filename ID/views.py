@@ -21,8 +21,9 @@ class CreateApplicationView(generics.CreateAPIView):
 
     def post(self, request, *args, **kwargs):
         serialized = ApplicationSerializers(data=request.data)
+        print(request.data)
         if serialized.is_valid():
-            serialized.save(user=request.user.profile)
+            serialized.save(user=request.user.profile, has_docs=False)
             content = {'status': 'Ok'}
             return Response(content, status=status.HTTP_200_OK)
         else:
@@ -41,6 +42,7 @@ class FileUploadView(APIView):
         if file_serializer.is_valid():
             file_serializer.save(application=application)
             application.status = 2
+            application.has_docs = True
             application.save()
             return Response(file_serializer.data, status=status.HTTP_201_CREATED)
         else:

@@ -6,9 +6,11 @@ from .models import Ticket, TicketComment
 
 
 class TicketSerializer(serializers.ModelSerializer):
+    issue_name = serializers.CharField(source='get_issue_display', read_only=True)
+
     class Meta:
         model = Ticket
-        fields = ('id', 'issue', 'description', 'province', 'city', 'suburb', 'street',
+        fields = ('id', 'issue', 'issue_name', 'description', 'province', 'city', 'suburb', 'street',
                   'date_created')
 
 

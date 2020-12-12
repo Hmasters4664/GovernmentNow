@@ -29,5 +29,6 @@ urlpatterns = [
     path('', include('CitizenSection.urls')),
     path('', include('Ticketing.urls')),
     path('', include('ID.urls')),
+    path('', include('Dashboard.urls')),
 
 ]
