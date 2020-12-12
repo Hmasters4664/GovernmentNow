@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'CitizenSection',
     'GovernmentSection',
     'Dashboard',
+    'drf_multiple_model',
 ]
 
 MIDDLEWARE = [

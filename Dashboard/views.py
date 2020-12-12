@@ -1,5 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
+from drf_multiple_model.views import ObjectMultipleModelAPIView
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.generics import get_object_or_404, CreateAPIView
 from rest_framework.parsers import FileUploadParser, MultiPartParser
@@ -72,3 +73,18 @@ class GetCityRanking(generics.ListAPIView):
 
     def get_queryset(self):
         return CityRanking.objects.all()
+
+
+class Dashboard(ObjectMultipleModelAPIView):
+
+
+    def get_querylist(self):
+        querylist = [
+            {'queryset': CityComplaintData.objects.all(),
+             'serializer_class': CityComplaintDataSerializer},
+            {'queryset': CitySolutionFixing.objects.all(),
+             'serializer_class': CitySolutionFixingSerializer},
+            {'queryset': CityRanking.objects.all(),
+             'serializer_class': CityRankingSerializer},
+        ]
+        return querylist

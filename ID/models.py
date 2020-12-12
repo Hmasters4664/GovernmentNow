@@ -70,6 +70,9 @@ class Application(models.Model):
     has_docs = models.BooleanField(default=True)
     date_created = models.DateField(auto_now=True)
 
+    class Meta:
+        ordering = ['-date_created']
+
 
 class Documents(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False, unique=True)

@@ -37,3 +37,6 @@ class CitySolutionFixing(models.Model):
 class CityRanking(models.Model):
     cityname = models.CharField(max_length=150, blank=False)
     rank = models.IntegerField(blank=False, )
+
+    class Meta:
+        ordering = ['rank']
